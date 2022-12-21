@@ -20,24 +20,25 @@ async function scrapeBlumSanLeandro() {
         // Find all of the menu items on the page
         const menuItems = Array.from(document.querySelectorAll('#menu-tab-wrapper > ol > li'));
 
-        console.log('menu items',menuItems);
+        console.log('menu items', menuItems);
         // Extract the data for each product
         return menuItems.map((menuItem) => {
+
             // Extract the product brand
-            //const category = menuItem.querySelector('.menu-item-category').innerText;
+            const category = document.querySelector("#menu-tab-wrapper > ol > li:nth-child(1) > div:nth-child(2) > a > div > span:nth-child(1)").innerText;
 
             // Extract the product name
-            //const name = menuItem.querySelector('.menu-item-title').innerText;
+            const name = document.querySelector("#menu-tab-wrapper > ol > li:nth-child(1) > div:nth-child(2) > a > div > div").innerText;
 
             // Extract the product price
             const price = document.querySelector("#menu-tab-wrapper > ol > li:nth-child(1) > div:nth-child(2) > div > div > div").innerText;
-            console.log(price);
+            console.log("data",name,category,price);
             // Return the product data as an object
             return {
-                //category,
-                //name,
+                name,
+                category,
                 price,
-            
+
             };
         });
     });
@@ -51,5 +52,5 @@ async function scrapeBlumSanLeandro() {
 }
 
 scrapeBlumSanLeandro().then((products) => {
-    console.log("products",products);
+    console.log("products", products);
 });
